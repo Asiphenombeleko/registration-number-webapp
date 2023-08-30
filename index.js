@@ -4,10 +4,13 @@ import bodyParser from 'body-parser'
 import { engine } from 'express-handlebars/types'
 import session from 'express-session'
 import flash from 'express-flash'
+import Registrations from 'regFactory.js'
 
 const app = express()
 //create an instance for my database function
 
+//create instance of my factory function
+ let registrations = Registrations()
 app.engine(
     "handlebars",
     engine({
