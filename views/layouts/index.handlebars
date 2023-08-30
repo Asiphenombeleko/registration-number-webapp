@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration number webapp</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <form method="post" action="">
+        <h1>Registration Number App</h1>
+    
+    <label for="registrationInput">Enter Registration Number:</label>
+    <input type="text" id="registrationInput">
+    <button onclick="displayRegistrationNumber()">Display</button>
+    
+    <h2>Registered Number:</h2>
+    <p id="displayArea"></p>
+
+    <script>
+        function displayRegistrationNumber() {
+            var registrationNumber = document.getElementById("registrationInput").value;
+            document.getElementById("displayArea").innerText = registrationNumber;
+        }
+    </script>
+    </form>
+    
+</body>
+</html>
