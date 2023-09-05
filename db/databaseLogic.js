@@ -27,12 +27,16 @@ export default function DbRegistration(db) {
         let results = await db.oneOrNone(`SELECT registrations from registration_table where town_id = $1`, [idResult]);
         return results ? results.registrations : [];
     }
+    async function resetData() {
+        await db.none('DELETE FROM registration_table')
+    }
 
     return {
         insertRegData,
         getTownId,
         filterTowns,
-        getAllTowns
+        getAllTowns,
+        resetData
 
     }
 
