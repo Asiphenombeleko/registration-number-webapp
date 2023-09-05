@@ -1,0 +1,43 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration number webapp</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <h1>Registration Plates</h1>
+    <div class="container">
+      
+      <form method="post" action="/">
+        <label for="registrationNumber">Registration Number:</label>
+
+        <input
+          type="text"
+          id="registrationNumber"
+          name="registrationNumber"
+          class="large-text-field"
+          size="20"
+        />
+        <button type="submit">ADD</button>
+      </form><br />
+
+      {{!-- <div class="registration-number">{{regFromUser}}</div> --}}
+      <form method="post" action="/">
+
+        <select>Towns
+          <option value="">Select a town</option>
+          <option value="CA">Cape Town</option>
+          <option value="CL">Stellenbosch</option>
+          <option value="CEM">Hermanus</option>
+          <option value="CJ">Paarl</option>
+          <option value="CY">Bellville</option>
+          <option value="CEY">Strandfontein</option>
+        </select>
+        <button type="submit">View</button>
+
+      </form>
+
+    </div>
+  </body>
+</html>
