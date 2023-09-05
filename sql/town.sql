@@ -1,1 +1,1 @@
-INSERT INTO town_table(towns)VALUES('Cape Town', 'CA'),('Paarl', 'CJ'),('Strandfontein','CEY'),('Bellville', 'CY'),('Hermanus', 'CEM'),('Stellenbosch', 'CL');
+INSERT INTO town_table(towns, town_tag)VALUES('Cape Town', 'CA'),('Paarl', 'CJ'),('Strandfontein','CZ'),('Bellville', 'CY'),('Hermanus', 'CE'),('Stellenbosch', 'CL');

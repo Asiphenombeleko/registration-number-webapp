@@ -6,9 +6,10 @@ import flash from 'express-flash'
 import session from 'express-session'
 import DbRegistration from './db/databaseLogic.js'
 import 'dotenv/config';
+import db from './database.js'
 const app = express()
 //create an instance for my database function
-const registrationModule = DbRegistration();
+const registrationModule = DbRegistration(db);
 //create instance of my factory function
 
 app.engine(
@@ -35,22 +36,24 @@ app.engine(
   // session middleware
   app.use(flash());
 
-  app.get("/" ,function(req, res){
-    res.render('index')
+  app.get("/" ,async function(req, res){
+    let allReg = await registrationModule.getAllTowns();
+    console.log(allReg);
+    res.render('index',{allReg})
   });
  // Route to insert registration data
 app.post('/insertRegData', async (req, res) => {
   try {
-      const { regNo } = req.body; 
-      await registrationModule.insertRegData(regNo);
-      res.status(200).send('Registration data inserted successfully.');
+      const { registrationNumber } = req.body; 
+      console.log(registrationNumber)
+      await registrationModule.insertRegData(registrationNumber.toUpperCase());
+      // res.status(200).send('Registration data inserted successfully.');
   } catch (error) {
       console.error(error);
       res.status(500).send('Error inserting registration data.');
   }
+  res.redirect('/')
 });
-
-
 app.get('/getTownId/:regNo', async (req, res) => {
   try {
       const regNo = req.params.regNo;
@@ -65,7 +68,6 @@ app.get('/getTownId/:regNo', async (req, res) => {
       res.status(500).send('Error fetching town ID.');
   }
 });
-
 // Route to filter towns by townTag
 app.get('/filterTowns/:townTag', async (req, res) => {
   try {
@@ -77,8 +79,6 @@ app.get('/filterTowns/:townTag', async (req, res) => {
       res.status(500).send('Error filtering towns.');
   }
 });
-  
-
 // Start the Express server
 const PORT = process.env.PORT || 3012;
 app.listen(PORT, ()=>{

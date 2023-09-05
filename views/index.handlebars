@@ -9,7 +9,7 @@
     <h1>Registration Plates</h1>
     <div class="container">
       
-      <form method="post" action="/">
+      <form method="post" action="/insertRegData">
         <label for="registrationNumber">Registration Number:</label>
 
         <input
@@ -22,7 +22,13 @@
         <button type="submit">ADD</button>
       </form><br />
 
-      {{!-- <div class="registration-number">{{regFromUser}}</div> --}}
+      <div class="registration-number">
+        {{#each allReg}}
+        {{this.registrations}} <br>
+        {{/each}}
+        
+      </div>
+
       <form method="post" action="/">
 
         <select>Towns
