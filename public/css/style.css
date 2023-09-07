@@ -20,7 +20,6 @@ body {
   text-align: center;
   border: 2px solid #ccc;
   border-radius: 10px;
-  /* padding: 10px; */
   margin-left: auto;
   margin-right: auto;
   max-width: 900px;
@@ -28,6 +27,10 @@ body {
 input {
   width: 250px;
   height: 50px;
+}
+.dropdown{
+  width: 800px;
+  height: 100px;
 }
 h2 {
   text-align: center;
@@ -40,8 +43,6 @@ h2 {
   padding: 0.5em;
   width: 250px;
   height: 50px;
-  /* display:flex;
-  flex-direction: row; */
   border: 1px solid #0b0a0a; /* Add a border to each plate for separation */
   padding: 10px;
   text-align: center;

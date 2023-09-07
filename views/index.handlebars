@@ -27,26 +27,26 @@
       </div>
       {{/each}}
     </div>
-    <form method="post" action="/reset">
-      <button class="button"
-          type="submit"
-          onclick="return confirm('Are you sure you want to reset your data?')">Reset</button>
-    </form>
-    {{!-- <form method="post" action="/insertRegData">
+    
+    <form class= "dropdown" method="post" action="/filter">
 
-      <select>Towns
+      <select name="allTowns">Towns
         <option value="">Select a town</option>
-        <option value="CA">Cape Town</option>
-        <option value="CL">Stellenbosch</option>
-        <option value="CEM">Hermanus</option>
-        <option value="CJ">Paarl</option>
-        <option value="CY">Bellville</option>
-        <option value="CEY">Strandfontein</option>
+        <option value="1">Cape Town</option>
+        <option value="6">Stellenbosch</option>
+        <option value="5">Hermanus</option>
+        <option value="2">Paarl</option>
+        <option value="4">Bellville</option>
+        <option value="3">Strandfontein</option>
       </select>
-
+      <button type="submit">View</button>
     </form>
-    <form method="post" action="/insertRegData"><button type="submit">View</button></form>
-  </div> --}}
+    <form method="post" action="/reset">
+      <button class="button" type="submit"
+        onclick="return confirm('Are you sure you want to reset your data?')">Reset</button>
+    </form>
+  </div>
+  
 </body>
 
 </html>

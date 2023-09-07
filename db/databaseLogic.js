@@ -1,5 +1,5 @@
 export default function DbRegistration(db) {
-   
+
     async function insertRegData(regNo) {
 
         let town_id = await getTownId(regNo);
@@ -12,20 +12,15 @@ export default function DbRegistration(db) {
         console.log(townTag)
         let results = await db.oneOrNone(`SELECT id FROM town_table WHERE town_tag = $1`, [townTag])
         console.log(results);
-        // let results = await db.oneOrNone(`SELECT id FROM town_table WHERE town_tag = $1`, [townTag])
         return results ? results.id : null;
     }
-     async function getAllTowns(){
+    async function getAllTowns() {
         return await db.any(`SELECT * FROM registration_table`)
-     }
+    }
 
-    async function filterTowns(townTag) {
-        let idResult = await getTownId(townTag);
-        if (idResult === null) {
-            return [];
-        }
-        let results = await db.oneOrNone(`SELECT registrations from registration_table where town_id = $1`, [idResult]);
-        return results ? results.registrations : [];
+    async function filterTowns(townId) {
+        return await db.manyOrNone('SELECT registrations FROM registration_table WHERE town_id = $1', [townId])
+      
     }
     async function resetData() {
         await db.none('DELETE FROM registration_table')

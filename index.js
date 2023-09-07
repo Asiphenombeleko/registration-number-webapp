@@ -7,10 +7,12 @@ import session from 'express-session'
 import DbRegistration from './db/databaseLogic.js'
 import 'dotenv/config';
 import db from './database.js'
+import index_route from './routes/index.routes.js';
 const app = express()
 //create an instance for my database function
 const registrationModule = DbRegistration(db);
-//create instance of my factory function
+//create instance of my index route function
+let indexRoute = index_route(registrationModule);
 
 app.engine(
   "handlebars",
@@ -36,56 +38,14 @@ app.use(
 // session middleware
 app.use(flash());
 
-app.get("/", async function (req, res) {
-  let allReg = await registrationModule.getAllTowns();
-  console.log(allReg);
-  res.render('index', {
-    allReg,
-  })
-});
+app.get("/", indexRoute.All);
 // Route to insert registration data
-app.post('/insertRegData', async (req, res) => {
-  try {
-    const { registrationNumber } = req.body;
-    console.log(registrationNumber)
-    await registrationModule.insertRegData(registrationNumber.toUpperCase());
-    // res.status(200).send('Registration data inserted successfully.');
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Error inserting registration data.');
-  }
-  res.redirect('/')
-});
-app.get('/getTownId/:regNo', async (req, res) => {
-  try {
-    const regNo = req.params.regNo;
-    const townId = await registrationModule.getTownId(regNo);
-    if (townId !== null) {
-      res.status(200).json({ townId });
-    } else {
-      res.status(404).send('Town not found');
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Error fetching town ID.');
-  }
-});
+app.post('/insertRegData', indexRoute.insert);
+
 // Route to filter towns by townTag
-app.get('/filterTowns/:townTag', async (req, res) => {
-  try {
-    const townTag = req.params.townTag;
-    const towns = await registrationModule.filterTowns(townTag);
-    res.status(200).json({ towns });
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Error filtering towns.');
-  }
-});
-app.post("/reset", async function (req, res) {
-  let reset = await registrationModule.resetData();
-  // req.flash("reset", 'Successfully reset!')
-  res.redirect("/")
-})
+app.post("/filter", indexRoute.filters)
+
+app.post("/reset", indexRoute.reset)
 
 // Start the Express server
 const PORT = process.env.PORT || 3012;

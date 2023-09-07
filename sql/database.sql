@@ -8,7 +8,7 @@ CREATE TABLE town_table (
 -- Create the table for the registration numbers and the id will make the relations of the tables
 CREATE TABLE registration_table (
     id serial PRIMARY KEY,
-    registrations VARCHAR(9) NOT NULL,
+    registrations VARCHAR(20) NOT NULL,
     town_id INT NOT NULL,
     FOREIGN KEY (town_id) REFERENCES town_table(id)
 );
