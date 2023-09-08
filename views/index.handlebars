@@ -13,6 +13,25 @@
     Town(CA),Hermanus(CE),Paarl(CY),Bellville(CJ),Strand(CZ),Stellenbosch(CL)</p>
   <div class="container">
 
+    <script>
+      // Clear the reset message after 3 seconds 
+      setTimeout(function () {
+        document.querySelector('.reset-message').style.display = 'none';
+      },
+        3000);
+    </script>
+      <div class="reset-message">{{ resetMesg }}</div>
+
+    <script>
+      // Clear the error message after 3 seconds 
+      setTimeout(function () {
+        document.querySelector('.reset-message').style.display = 'none';
+      },
+        3000);
+    </script>
+      <div class="error-message">{{ errors }}</div>
+
+
     <form method="post" action="/insertRegData">
       <label for="registrationNumber">Registration Number:</label>
 
@@ -27,8 +46,8 @@
       </div>
       {{/each}}
     </div>
-    
-    <form class= "dropdown" method="post" action="/filter">
+
+    <form class="dropdown" method="post" action="/filter">
 
       <select name="allTowns">Towns
         <option value="">Select a town</option>
@@ -42,11 +61,11 @@
       <button type="submit">View</button>
     </form>
     <form method="post" action="/reset">
-      <button class="button" type="submit"
+      <button class="button reset-message" type="submit"
         onclick="return confirm('Are you sure you want to reset your data?')">Reset</button>
     </form>
   </div>
-  
+
 </body>
 
 </html>

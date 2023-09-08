@@ -7,12 +7,16 @@ import session from 'express-session'
 import DbRegistration from './db/databaseLogic.js'
 import 'dotenv/config';
 import db from './database.js'
-import index_route from './routes/index.routes.js';
+import index_route from './routes/index_routes.js';
+import registrations from './regfactory.js'
 const app = express()
 //create an instance for my database function
 const registrationModule = DbRegistration(db);
 //create instance of my index route function
-let indexRoute = index_route(registrationModule);
+let Registration = registrations(registrationModule)
+let indexRoute = index_route(registrationModule, Registration);
+
+
 
 app.engine(
   "handlebars",
@@ -44,9 +48,10 @@ app.post('/insertRegData', indexRoute.insert);
 
 // Route to filter towns by townTag
 app.post("/filter", indexRoute.filters)
-
+//route to reset my database
 app.post("/reset", indexRoute.reset)
-
+//route for my errors 
+app.post("/errors", )
 // Start the Express server
 const PORT = process.env.PORT || 3012;
 app.listen(PORT, () => {

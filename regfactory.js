@@ -13,13 +13,33 @@ export default function Registrations(registrationModule) {
         const isValidFormat = regex.test(formattedRegNo);
         return isValidFormat;
     }
-    async function errors(){
+    async function checkPlate(regNo) {
+        let checked = regex.test(regNo)
+        let checking = await registrationModule.checkAllPlates(regNo)
+        if (checked) {
+            
+        }
 
+    }
+    async function errors(req, res) {
+      //  let townAvail = await registrationModule.getAllTown()
+        let townId = req.body;
+        let errorMessage = ""
+        const { registrationNumber } = req.body;
+        if(registrationNumber.length <1){
+            errorMessage = "Please enter registration"
+        }
+        if(!townId){
+          errorMessage = "No Registration plates found"  
+            
+        }
+        return errorMessage
     }
     return {
         insertRegistration,
         getReg,
-        errors
-       
+        errors,
+        checkPlate
+
     };
 }

@@ -84,3 +84,19 @@ button {
   border-radius: 4px; /* Rounded corners */
   cursor: pointer;
 }
+.reset-message {
+  background: rgb(156, 238, 151);
+  color: rgb(47, 209, 65);
+  border: 1px solid rgb(29, 177, 59);
+  border-radius: 0.25rem;
+  margin-inline: auto;
+  padding: 0.25rem 0.5rem;
+}
+.error-message {
+  background: #fcc;
+  color: red;
+  border: 1px solid red;
+  border-radius: 0.25rem;
+  margin-inline: auto;
+  padding: 0.25rem 0.5rem;
+}
