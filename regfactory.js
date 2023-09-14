@@ -14,32 +14,35 @@ export default function Registrations(registrationModule) {
         return isValidFormat;
     }
     async function checkPlate(regNo) {
-        let checked = regex.test(regNo)
-        let checking = await registrationModule.checkAllPlates(regNo)
-        if (checked) {
-            
+        const formattedRegNo = regNo.toUpperCase();
+        const isValidFormat = regex.test(formattedRegNo);
+
+        if (!isValidFormat) {
+           return 'Invalid registration number format'
         }
 
+        // Assuming registrationModule.checkAllPlates exists, you can call it here.
+        const checking = await registrationModule.checkAllPlates(formattedRegNo);
+
+        return checking; // Return the result of checking
     }
-    async function errors(req, res) {
-      //  let townAvail = await registrationModule.getAllTown()
-        let townId = req.body;
+     function errorHandling(regNo) {
+
         let errorMessage = ""
-        const { registrationNumber } = req.body;
-        if(registrationNumber.length <1){
-            errorMessage = "Please enter registration"
+        if(regNo.length < 1){
+            errorMessage = "Please enter registration number"
         }
-        if(!townId){
-          errorMessage = "No Registration plates found"  
-            
+        if(!getReg(regNo)){
+            errorMessage = "Please enter valid registration number"
         }
-        return errorMessage
+
+        return errorMessage;
     }
+  
     return {
         insertRegistration,
         getReg,
-        errors,
-        checkPlate
-
+        checkPlate,
+        errorHandling
     };
 }

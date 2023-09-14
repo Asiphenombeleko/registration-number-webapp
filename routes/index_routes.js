@@ -1,25 +1,25 @@
-export default function regNumbers(registrationModule, Registration) {
+export default function regNumbers(registrationModule,registrations) {
 
     async function All(req, res) {
         let allReg = await registrationModule.getAllTowns();
         let resetMesg = req.flash("reset")[0];
-        let errorMessage = req.flash("error")[0];
-        console.log(allReg);
+        let errorMessage = req.flash("error")[0]
+
         res.render('index', {
             allReg,
             resetMesg,
-            errors : errorMessage
+            errorMessage
         })
     }
     async function insert(req, res) {
-        const { registrationNumber } = req.body;
-        await registrationModule.insertRegData()
-        req.flash("error", registrationModule.errors(registrationNumber))
-        console.log(registrationNumber)
-        // let checking = await registrationModule.checkAllPlates(registrationNumber)
-        if (registrationNumber) {
+        const  registrationNumber  = req.body.registrationNumber;
+        if(registrations.getReg(registrationNumber)){
             await registrationModule.insertRegData(registrationNumber.toUpperCase());
         }
+        else{
+            req.flash("error" ,registrations.errorHandling(registrationNumber))
+        }
+
         res.redirect('/')
     }
     async function reset(req, res) {
@@ -36,8 +36,12 @@ export default function regNumbers(registrationModule, Registration) {
         res.render('index', {
             allReg
         })
-    }
    
+   
+    }
+  
+
+
     return {
         insert,
         All,
