@@ -51,7 +51,7 @@ app.post("/filter", indexRoute.filters)
 //route to reset my database
 app.post("/reset", indexRoute.reset)
 //route for my errors 
-app.post("/errors", indexRoute.errorHandling)
+// app.post("/errors", indexRoute.insert)
 // Start the Express server
 const PORT = process.env.PORT || 3012;
 app.listen(PORT, () => {

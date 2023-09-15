@@ -1,3 +1,4 @@
+
 export default function DbRegistration(db) {
 
     async function insertRegData(regNo) {
@@ -8,8 +9,14 @@ export default function DbRegistration(db) {
 
     async function getTownId(regNo) {
         let townTag = regNo.substring(0, 2);
-        let results = await db.oneOrNone(`SELECT id FROM town_table WHERE town_tag = $1`, [townTag])
-        return results ? results.id :results
+        try{
+
+            let results = await db.oneOrNone(`SELECT id FROM town_table WHERE town_tag = $1`, [townTag])
+            return results.id
+        }
+        catch(errors){
+            console.log("error", "please");
+        }
     }
     async function getAllTowns() {
         return await db.any(`SELECT * FROM registration_table`)

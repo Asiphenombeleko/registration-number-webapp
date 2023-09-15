@@ -1,12 +1,8 @@
 export default function Registrations(registrationModule) {
-    const regex = /([A-Z]{2} \d{3,}[-\s]?\d{3,})+/g;
+    let regex = /^C[ALZEJ][ ]\d{3}[- ]?\d{1,3}$/
     let registrationNumbers = [];
+    let errorMessage;
 
-    async function insertRegistration(regNo) {
-        const formattedRegNo = regNo.toUpperCase();
-        registrationNumbers.push(formattedRegNo);
-        return formattedRegNo;
-    }
 
     async function getReg(regNo) {
         const formattedRegNo = regNo.toUpperCase();
@@ -17,30 +13,31 @@ export default function Registrations(registrationModule) {
         const formattedRegNo = regNo.toUpperCase();
         const isValidFormat = regex.test(formattedRegNo);
 
-        if (!isValidFormat) {
-           return 'Invalid registration number format'
+        if (isValidFormat) {
+            console.log("****" + isValidFormat, regNo);
+
+            let result = await registrationModule.insertRegData(regNo)
+            console.log(result);
+            return result
+        }
+        else {
+            console.log(isValidFormat, regNo);
+            errorMessage = 'Please enter correct car registration format.'
         }
 
-        // Assuming registrationModule.checkAllPlates exists, you can call it here.
-        const checking = await registrationModule.checkAllPlates(formattedRegNo);
-
-        return checking; // Return the result of checking
     }
-     function errorHandling(regNo) {
+    function errorHandling(regNo) {
 
-        let errorMessage = ""
-        if(regNo.length < 1){
+        if (regNo.length < 1) {
             errorMessage = "Please enter registration number"
         }
-        if(!getReg(regNo)){
-            errorMessage = "Please enter valid registration number"
+        if (getReg(regNo) && regNo.length > 12) {
+            errorMessage = 'Too long!!'
         }
-
         return errorMessage;
     }
-  
+
     return {
-        insertRegistration,
         getReg,
         checkPlate,
         errorHandling

@@ -14,11 +14,9 @@ export default function regNumbers(registrationModule,registrations) {
     async function insert(req, res) {
         const  registrationNumber  = req.body.registrationNumber;
         if(registrations.getReg(registrationNumber)){
-            await registrationModule.insertRegData(registrationNumber.toUpperCase());
+            await registrations.checkPlate(registrationNumber.toUpperCase());
         }
-        else{
             req.flash("error" ,registrations.errorHandling(registrationNumber))
-        }
 
         res.redirect('/')
     }
