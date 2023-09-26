@@ -2,19 +2,21 @@
 export default function DbRegistration(db) {
 
     async function insertRegData(regNo) {
-        let town_id = await getTownId(regNo);
-       
-        await db.none(`INSERT INTO registration_table (registrations, town_id) VALUES($1, $2)`, [regNo, town_id])
+        let town_id = await getTownId();
+
+        if (town_id !== null) {
+            await db.none(`INSERT INTO registration_table (registrations, town_id) VALUES($1, $2)`, [regNo, town_id]);
+        }
     }
 
     async function getTownId(regNo) {
-        let townTag = regNo.substring(0, 2);
-        
+        if (typeof regNo === 'string') {
+            let townTag = regNo.substring(0, 2);
+
 
             let results = await db.oneOrNone(`SELECT id FROM town_table WHERE town_tag = $1`, [townTag])
-            return results.id
-        
-       
+            return results ? results.id : results;
+        }
     }
     async function getAllTowns() {
         return await db.any(`SELECT * FROM registration_table`)
@@ -26,7 +28,7 @@ export default function DbRegistration(db) {
 
     async function filterTowns(townId) {
         return await db.manyOrNone('SELECT registrations FROM registration_table WHERE town_id = $1', [townId])
-      
+
     }
     async function resetData() {
         await db.none('DELETE FROM registration_table')
