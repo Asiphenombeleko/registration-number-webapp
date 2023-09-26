@@ -7,14 +7,13 @@ const connectionString = process.env.DATABASE_URL || "postgresql://codex:xcode12
 
 const db = pgPromise()(connectionString);
 
-describe('Registration Data', function () {
-  this.timeout(20000)
+// describe('Registration Data', function () {
+//   this.timeout(20000)
 
-  beforeEach(async function () {
-    await db.none('DELETE FROM registration_table')
+//   beforeEach(async function () {
+//     await db.none('DELETE FROM registration_table')
 
-  })
-  let data = database(db)
+//   })
   // it('should insert registration data into the database', async () => {
   //   const regNo = 'CA 123 123';
   //     const regId = 1
@@ -27,6 +26,8 @@ describe('Registration Data', function () {
   // });
 
   describe('getTownId', () => {
+
+  let data = database(db)
     it('should return the town ID for a valid town tag', async () => {
       const townTag = 'CA';
       const townId = await data.getTownId(townTag);
@@ -42,6 +43,8 @@ describe('Registration Data', function () {
   });
 
   describe('getAllTowns', () => {
+
+  let data = database(db)
     it('should return an array of all towns', async () => {
       const towns = await data.getAllTowns();
       assert(Array.isArray(towns));
@@ -50,6 +53,8 @@ describe('Registration Data', function () {
   });
 
   describe('filterTowns', () => {
+
+  let data = database(db)
     it('should return registration data for a specific town', async () => {
       const townId = 1;
       const registrations = await data.filterTowns(townId);
@@ -64,6 +69,8 @@ describe('Registration Data', function () {
     });
   });
   describe('resetData', () => {
+
+  let data = database(db)
     it('should reset the registration data in the database', async () => {
       try {
         await data.resetData();
@@ -73,4 +80,4 @@ describe('Registration Data', function () {
       }
     });
   });
-});
+
