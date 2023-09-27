@@ -1,8 +1,6 @@
 export default function Registrations(registrationModule) {
-    let regex = /^C[ALZEJ][ ]\d{3}[- ]?\d{1,3}$/
-    let registrationNumbers = [];
-    let errorMessage;
-
+    let regex = /^C[AEYJLZ][ ]\d{3}[- ]?\d{1,3}$/
+    let errorMessage = ''
 
     async function getReg(regNo) {
         const formattedRegNo = regNo.toUpperCase();
@@ -14,17 +12,18 @@ export default function Registrations(registrationModule) {
         const isValidFormat = regex.test(formattedRegNo);
 
         if (isValidFormat) {
-            console.log("****" + isValidFormat, regNo);
+            if (await registrationModule.checkDuplicates(regNo) == 0) {
+                let result = await registrationModule.insertRegData(regNo)
+            } else {
+                errorMessage = 'Registration number already exists'
+                return errorMessage
+            }
 
-            let result = await registrationModule.insertRegData(regNo)
-            console.log(result);
-            return result
-        }
-        else {
-            console.log(isValidFormat, regNo);
+
+        } else {
             errorMessage = 'Please enter correct car registration format.'
         }
-
+        return errorMessage
     }
     function errorHandling(regNo) {
 
@@ -32,7 +31,7 @@ export default function Registrations(registrationModule) {
             errorMessage = "Please enter registration number"
         }
         if (getReg(regNo) && regNo.length > 12) {
-            errorMessage = 'Too long!!'
+            errorMessage = 'Registration number Too long!!'
         }
         return errorMessage;
     }

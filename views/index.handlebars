@@ -32,7 +32,7 @@
     </form><br />
 
     <div class="registration-grid">
-      {{#each allReg}}
+      {{#each display}}
       <div class="registration-number">
         {{this.registrations}}
       </div>
@@ -42,7 +42,7 @@
     <form class="dropdown" method="post" action="/filter">
 
       <select name="allTowns">Towns
-        <option value="allTowns">Select a town</option>
+        <option value=" ">Select a town</option>
         <option value="1">Cape Town</option>
         <option value="6">Stellenbosch</option>
         <option value="5">Hermanus</option>

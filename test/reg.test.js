@@ -22,8 +22,20 @@ const db = pgPromise()(connectionString);
   //   let regData  = await data.insertRegData(regNo)
 
   //   assert.deepEqual(regData.regNo, 'CA 123 123')
-  //   // You can add more assertions to check if the data was inserted correctly.
   // });
+  describe('insertRegData', () => {
+    let data = database(db)
+    it('should insert registration data into the database', async () => {
+      const townTag = 'CA';
+      const townId = await data.getTownId(townTag);
+      try {
+        await data.insertRegData(regNo);
+        
+      } catch (error) {
+        assert.equal(townId,null);
+      }
+    });
+  });
 
   describe('getTownId', () => {
 
