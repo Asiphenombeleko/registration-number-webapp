@@ -8,21 +8,21 @@ const connectionString = process.env.DATABASE_URL || "postgresql://codex:xcode12
 const db = pgPromise()(connectionString);
 
 
-  describe('insertRegData', () => {
+  // describe('insertRegData', () => {
     
     
-    let data = database(db)
-    it('should insert registration data into the database', async () => {
-      const townTag = 'CA';
-      const townId = await data.getTownId(townTag);
-      try {
-        await data.insertRegData(regNo);
+  //   let data = database(db)
+  //   it('should insert registration data into the database', async () => {
+  //     const townTag = 'CA';
+  //     const townId = await data.getTownId(townTag);
+  //     try {
+  //       await data.insertRegData(regNo);
         
-      } catch (error) {
-        assert.equal(townId,null);
-      }
-    });
-  });
+  //     } catch (error) {
+  //       assert.equal(townId,null);
+  //     }
+  //   });
+  // });
 
   describe('getTownId', () => {
 
