@@ -8,15 +8,16 @@ export default function Registrations(registrationModule) {
         return isValidFormat;
     }
     async function checkPlate(regNo) {
+        errorMessage = ""
         const formattedRegNo = regNo.toUpperCase();
         const isValidFormat = regex.test(formattedRegNo);
 
         if (isValidFormat) {
             if (await registrationModule.checkDuplicates(regNo) == 0) {
-                await registrationModule.insertRegData(regNo)
+               await registrationModule.insertRegData(regNo)
             } else {
                 errorMessage = 'Registration number already exists'
-                 return errorMessage
+                return errorMessage
             }
 
 
@@ -26,6 +27,7 @@ export default function Registrations(registrationModule) {
         return errorMessage
     }
     function errorHandling(regNo) {
+        errorMessage ='';
 
         if (regNo.length < 1) {
             errorMessage = "Please enter registration number"

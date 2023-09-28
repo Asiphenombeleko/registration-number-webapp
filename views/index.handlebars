@@ -22,7 +22,9 @@
     {{#if resetMesg}}
     <div class="reset-message">{{ resetMesg }}</div>
     {{/if}}
-
+    {{#if errorMessage}}
+    <div class="error-message">{{ errorMessage }}</div>
+    {{/if}}
 
     <form method="post" action="/insertRegData">
       <label for="registrationNumber">Registration Number:</label>
@@ -39,27 +41,7 @@
       {{/each}}
     </div>
 
-    <form class="dropdown" method="post" action="/filter">
 
-      <select name="allTowns">Towns
-        <option value=" ">Select a town</option>
-        <option value="1">Cape Town</option>
-        <option value="6">Stellenbosch</option>
-        <option value="5">Hermanus</option>
-        <option value="2">Paarl</option>
-        <option value="4">Bellville</option>
-        <option value="3">Strandfontein</option>
-      </select>
-      <button type="submit">View</button>
-    </form>
-
-    {{#if errorMessage}}
-    <div class="error-message">{{ errorMessage }}</div>
-    {{/if}}
-    <form method="post" action="/reset">
-      <button class="button reset" type="submit"
-        onclick="return confirm('Are you sure you want to reset your data?')">Reset</button>
-    </form>
     <script>
       // Clear the error message after 3 seconds 
       setTimeout(function () {
@@ -67,6 +49,31 @@
       },
         3000);
     </script>
+    <div class="drop">
+      <form class="dropdown" method="post" action="/filter">
+
+        <select name="allTowns">Towns
+          <option class="dropdown-item" value=" ">Select a town</option>
+          <option class="dropdown-item" value="1">Cape Town</option>
+          <option class="dropdown-item" value="6">Stellenbosch</option>
+          <option class="dropdown-item" value="5">Hermanus</option>
+          <option class="dropdown-item" value="2">Paarl</option>
+          <option class="dropdown-item" value="4">Bellville</option>
+          <option class="dropdown-item" value="3">Strandfontein</option>
+        </select>
+        <button type="submit">View </button>
+      </form>
+      <div class="button-container">
+        <form method="post" action="/">
+          <button type="submit">View All</button>
+        </form>
+        <form method="post" action="/reset">
+          <button class="button reset" type="submit"
+            onclick="return confirm('Are you sure you want to reset your data?')">Reset</button>
+        </form>
+
+      </div>
+    </div>
 
   </div>
 

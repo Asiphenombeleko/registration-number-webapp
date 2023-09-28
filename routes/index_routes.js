@@ -4,23 +4,26 @@ export default function regNumbers(registrationModule, registrations) {
         let allReg = await registrationModule.getAllTowns();
         let resetMesg = req.flash("reset")[0];
         let errorMessage = req.flash("error")[0]
+        let nullError = errorMessage;
         let showReg = !errorMessage;
         console.log(errorMessage);
 
         res.render('index', {
-            display: showReg ? allReg : allReg ,
+            display: showReg ? allReg : allReg||nullError ,
             resetMesg,
             errorMessage
         })
     }
     async function insert(req, res) {
         const registrationNumber = req.body.registrationNumber;
+        if(registrationNumber == ''){
+            req.flash("error", registrations.errorHandling(registrationNumber))
+        }
         if (registrations.getReg(registrationNumber)) {
             let checking = await registrations.checkPlate(registrationNumber.toUpperCase());
-            console.log(checking);
+            // console.log(checking);
             req.flash("error", checking);
         }
-        req.flash("errorz", registrations.errorHandling(registrationNumber))
 
         res.redirect('/')
     }

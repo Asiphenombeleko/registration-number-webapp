@@ -44,10 +44,12 @@ app.use(flash());
 
 app.get("/", indexRoute.All);
 
+app.post("/",indexRoute.All );
 // Route to insert registration data
 app.post('/insertRegData', indexRoute.insert);
 
 // Route to filter towns by townTag
+app.get("/filter", indexRoute.filters)
 app.post("/filter", indexRoute.filters)
 
 //route to reset my database

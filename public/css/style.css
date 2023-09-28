@@ -8,9 +8,8 @@ body {
   height: 100vh;
   margin: 0;
 }
+
 .container {
-  margin-right: auto;
-  margin-right: auto;
   width: 800px;
   justify-content: center;
   background-image: url("https://wallpaperaccess.com/full/5636721.jpg");
@@ -22,19 +21,47 @@ body {
   border-radius: 10px;
   margin-left: auto;
   margin-right: auto;
-  max-width: 900px;
+   display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  
+}
+form{
+  padding-top: 1em;
 }
 input {
   width: 250px;
   height: 50px;
 }
-.dropdown{
-  width: 800px;
-  height: 100px;
+
+.button-container {
+  text-align: center;
+  align-items: center;
+  display: flex;
+  gap: 10px;
 }
+
+.dropdown select {
+  height: 50px;
+  width: 100%;
+  
+}
+
+/* Style the dropdown options */
+.dropdown select option {
+  height: 50px;
+  padding: 10px; /* Add padding to make the options more visually appealing */
+}
+
 h2 {
   text-align: center;
 }
+/* .drop{
+  justify-content: center;
+  text-align: center;
+  justify-items: center;
+} */
 .registration-number {
   border-color: black;
   border-radius: 10px;
@@ -54,6 +81,7 @@ h2 {
     1fr
   ); /* Adjust the number of columns as needed */
   gap: 20px;
+  /* padding-bottom: 1em; */
 }
 p {
   font-size: large;
@@ -61,6 +89,7 @@ p {
   text-align: center;
 }
 button[type="reset"] {
+  font-size: 0.7em;
   background-color: #007bff; /* Red background color */
   color: #f8f5f5; /* White text color */
   padding: 10px 20px; /* Padding around the button text */
@@ -68,8 +97,10 @@ button[type="reset"] {
   border-radius: 4px; /* Rounded corners */
   cursor: pointer; /* Change cursor to a pointer on hover */
 }
+
 button[type="submit"] {
-  background-color: #007bff; /* Blue background color */
+  font-size: 0.7em;
+  background-color: #007bff; 
   color: #fff; /* White text color */
   padding: 10px 20px; /* Padding around the button text */
   border: none; /* Remove the button border */
@@ -77,7 +108,8 @@ button[type="submit"] {
   cursor: pointer; /* Change cursor to a pointer on hover */
 }
 button {
-  background-color: #007bff; /* Blue background color */
+  font-size: 0.7em;
+  background-color: #007bff; 
   color: #fff; /* White text color */
   padding: 10px 20px; /* Padding around the button text */
   border: none; /* Remove the button border */
