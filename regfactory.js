@@ -13,10 +13,10 @@ export default function Registrations(registrationModule) {
 
         if (isValidFormat) {
             if (await registrationModule.checkDuplicates(regNo) == 0) {
-                let result = await registrationModule.insertRegData(regNo)
+                await registrationModule.insertRegData(regNo)
             } else {
                 errorMessage = 'Registration number already exists'
-                return errorMessage
+                 return errorMessage
             }
 
 
