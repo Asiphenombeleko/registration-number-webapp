@@ -56,7 +56,7 @@ app.post("/filter", indexRoute.filters)
 app.post("/reset", indexRoute.reset)
 
 // Start the Express server
-const PORT = process.env.PORT || 3012;
+const PORT = process.env.PORT || 3011;
 app.listen(PORT, () => {
   console.log("listen at localhost:", PORT);
 })

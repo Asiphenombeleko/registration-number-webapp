@@ -1,6 +1,6 @@
 body {
   font-size: xx-large;
-  background-image: url("https://wallpaperaccess.com/full/5636721.jpg");
+  background-image: url("https://e0.pxfuel.com/wallpapers/351/990/desktop-wallpaper-ferrari-330-car-red-italian-beautiful-race.jpg");
   background-size: cover;
   background-color: rgb(236, 185, 166);
   justify-content: center;
@@ -12,7 +12,7 @@ body {
 .container {
   width: 800px;
   justify-content: center;
-  background-image: url("https://wallpaperaccess.com/full/5636721.jpg");
+  background-image: url("https://e0.pxfuel.com/wallpapers/351/990/desktop-wallpaper-ferrari-330-car-red-italian-beautiful-race.jpg");
   background-size: cover;
   background-color: cornsilk;
   padding: 4em;
@@ -33,6 +33,10 @@ form{
 input {
   width: 250px;
   height: 50px;
+  color: #ccc;
+}
+label{
+  color: #ccc;
 }
 
 .button-container {
@@ -56,6 +60,7 @@ input {
 
 h2 {
   text-align: center;
+  color: #ccc;
 }
 /* .drop{
   justify-content: center;
@@ -85,7 +90,7 @@ h2 {
 }
 p {
   font-size: large;
-  color: #2c2929;
+  color:white;
   text-align: center;
 }
 button[type="reset"] {

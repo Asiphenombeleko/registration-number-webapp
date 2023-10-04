@@ -8,21 +8,36 @@ const connectionString = process.env.DATABASE_URL || "postgresql://codex:xcode12
 const db = pgPromise()(connectionString);
 
 
-  // describe('insertRegData', () => {
-    
-    
-  //   let data = database(db)
-  //   it('should insert registration data into the database', async () => {
-  //     const townTag = 'CA';
-  //     const townId = await data.getTownId(townTag);
-  //     try {
-  //       await data.insertRegData(regNo);
-        
-  //     } catch (error) {
-  //       assert.equal(townId,null);
-  //     }
-  //   });
-  // });
+describe('insertRegData', () => {
+  let data = database(db);
+
+  it('should insert registration data into the database', async () => {
+    const regNo = 'CA 123 456';
+    const townTag = 'CA';
+    const townId = await data.getTownId(townTag);
+
+
+    try {
+      const inserted = await data.insertRegData(regNo, townTag);
+      assert(inserted), true;
+    } catch (error) {
+      assert.fail(error);
+    }
+  });
+
+  it('should not insert invalid registration data into the database', async () => {
+    const invalidRegNo = 'kl 123 45678';
+    const townTag = 'kl';
+
+    try {
+      const inserted = await data.insertRegData(invalidRegNo, townTag);
+      assert.equal(inserted, false);
+    } catch (error) {
+      assert.fail(error);
+    }
+  });
+});
+
 
   describe('getTownId', () => {
 
@@ -56,6 +71,7 @@ const db = pgPromise()(connectionString);
   let data = database(db)
     it('should return registration data for a specific town', async () => {
       const townId = 1;
+      
       const registrations = await data.filterTowns(townId);
       assert(Array.isArray(registrations));
 
